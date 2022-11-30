@@ -3,9 +3,9 @@ import React from 'react';
 
 const CategoryCard = ({ imgUrl, title }) => {
   return (
-    <TouchableOpacity className='mr-3 relative'>
-      <Image source={{ uri: imgUrl }} className='h-20 w-20 rounded' />
-      <Text className='absolute bottom-1 left-1 font-bold text-white'>
+    <TouchableOpacity className='relative mr-4'>
+      <Image source={{ uri: imgUrl }} className='w-20 h-20 rounded' />
+      <Text className='absolute font-bold text-white bottom-1 left-1'>
         {title}
       </Text>
     </TouchableOpacity>

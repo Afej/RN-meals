@@ -13,22 +13,40 @@ import {
 } from 'react-native-heroicons/outline';
 import Categories from '../../components/Categories';
 import FeaturedRow from '../../components/FeaturedRow';
+import { useEffect, useState } from 'react';
+import sanityClient from '../../sanity';
 
 const HomeScreen = () => {
+  const [featuredCategories, setFeaturedCategories] = useState([]);
+
+  const query = `
+    *[_type == "featured"] {
+      ...,
+      restaurants[]->{
+        ...,
+        dishes[]->,
+      }
+    }
+  `;
+
+  useEffect(() => {
+    sanityClient.fetch(query).then((data) => setFeaturedCategories(data));
+  }, []);
+
   return (
-    <SafeAreaView className='bg-white pt-5'>
+    <SafeAreaView className='pt-5 bg-white'>
       {/* header */}
-      <View className='flex-row mx-4 items-center pb-3 space-x-2'>
+      <View className='flex-row items-center pb-3 mx-4 space-x-2'>
         <Image
           source={{
             uri: 'https://images.unsplash.com/photo-1493770348161-369560ae357d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
           }}
-          className='h-7 w-7 bg-gray-300 p-4 rounded-full'
+          className='p-4 bg-gray-300 rounded-full h-7 w-7'
         />
 
         <View className='flex-1'>
-          <Text className='font-bold text-gray-400 text-sm'>Deliver Now!</Text>
-          <Text className='font-bold text-xl'>
+          <Text className='text-sm font-bold text-gray-400'>Deliver Now!</Text>
+          <Text className='text-xl font-bold'>
             Current Location <ChevronDownIcon size={20} color='#00CCBB' />
           </Text>
         </View>
@@ -37,11 +55,11 @@ const HomeScreen = () => {
       </View>
 
       {/* search */}
-      <View className='flex-row items-center space-x-2 py-3 mx-4'>
-        <View className='flex-row items-center flex-1 bg-gray-200 p-3 rounded-sm'>
+      <View className='flex-row items-center py-3 mx-4 space-x-2'>
+        <View className='flex-row items-center flex-1 p-3 bg-gray-200 rounded-sm'>
           <MagnifyingGlassIcon size={20} color='gray' />
           <TextInput
-            placeholder='Restuarants and cuisines'
+            placeholder='Restaurants and cuisines'
             keyboardType='default'
           />
         </View>
@@ -58,21 +76,15 @@ const HomeScreen = () => {
         <Categories />
 
         {/* featured */}
-        <FeaturedRow
-          id='1'
-          title='Featured'
-          description='lorem isdndmdm iifjfjfj'
-        />
-        <FeaturedRow
-          id='12'
-          title='Featured'
-          description='lorem isdndmdm iifjfjfj'
-        />
-        <FeaturedRow
-          id='123'
-          title='Featured'
-          description='lorem isdndmdm iifjfjfj'
-        />
+        {featuredCategories?.map((category) => (
+          <FeaturedRow
+            key={category._id}
+            id={category._id}
+            title={category.name}
+            description={category.short_description}
+          />
+        ))}
+
       </ScrollView>
     </SafeAreaView>
   );

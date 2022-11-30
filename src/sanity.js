@@ -4,8 +4,7 @@ import imageUrlBuilder from '@sanity/image-url';
 const client = sanityClient({
   projectId: 'hiz9y8ag',
   dataset: 'production',
-  apiVersion: '2022-11-30', // use current UTC date - see "specifying API version"!
-  token: ' ', // or leave blank for unauthenticated usage
+  apiVersion: '2021-10-21', // use current UTC date - see "specifying API version"!
   useCdn: true, // `false` if you want to ensure fresh data
 });
 

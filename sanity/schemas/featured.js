@@ -16,15 +16,10 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      name: 'restuarants',
+      name: 'restaurants',
       type: 'array',
-      title: 'Restuarants',
-      of: [
-        {
-          type: 'reference',
-          to: [{ type: 'restuarant' }],
-        },
-      ],
-    }, 
+      title: 'Restaurants',
+      of: [{ type: 'reference', to: [{ type: 'restaurant' }] }],
+    },
   ],
 };

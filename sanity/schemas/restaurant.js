@@ -1,12 +1,12 @@
 export default {
-  name: 'restuarant',
+  name: 'restaurant',
   type: 'document',
-  title: 'Restuarant',
+  title: 'Restaurant',
   fields: [
     {
       name: 'name',
       type: 'string',
-      title: 'Restuarant Name',
+      title: 'Restaurant Name',
       validation: (Rule) => Rule.required(),
     },
     {
@@ -18,22 +18,22 @@ export default {
     {
       name: 'image',
       type: 'image',
-      title: 'Image of the Restuarant',
+      title: 'Image of Category',
     },
     {
       name: 'lat',
       type: 'number',
-      title: 'Latitude of the Restuarant',
+      title: 'Latitude of the Restaurant',
     },
     {
       name: 'long',
       type: 'number',
-      title: 'Longitude of the Restuarant',
+      title: 'Longitude of the Restaurant',
     },
     {
       name: 'address',
       type: 'string',
-      title: 'Restuarant Address',
+      title: 'Restaurant Address',
       validation: (Rule) => Rule.required(),
     },
     {
@@ -56,7 +56,7 @@ export default {
     {
       name: 'dishes',
       type: 'array',
-      title: 'Restuarant Dishes',
+      title: 'Restaurant Dishes',
       of: [{ type: 'reference', to: [{ type: 'dish' }] }],
     },
   ],
