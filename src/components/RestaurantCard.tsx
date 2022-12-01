@@ -2,10 +2,23 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import { MapPinIcon, StarIcon } from 'react-native-heroicons/solid';
 import { urlFor } from '../sanity';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from '../typings';
 
-const RestaurantCard = ({ name, image, rating, address, type }) => {
+const RestaurantCard = ({ restaurant }) => {
+  const { name, image, rating, address, type } = restaurant;
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
+  const openRestaurantScreen = () => {
+    navigation.navigate('Restaurant', {
+      restaurant,
+    });
+  };
+
   return (
-    <TouchableOpacity className='mr-3 bg-white shadow'>
+    <TouchableOpacity
+      className='mr-3 bg-white shadow'
+      onPress={openRestaurantScreen}>
       <Image
         source={{ uri: urlFor(image).url() }}
         className='w-64 rounded h-36'

@@ -3,9 +3,12 @@ import { View, Text, ScrollView } from 'react-native';
 import { ArrowRightIcon } from 'react-native-heroicons/outline';
 import RestaurantCard from './RestaurantCard';
 import sanityClient from '../sanity';
+import { IRestaurant } from '../typings';
+
+// type FeaturedRowProps = {}
 
 const FeaturedRow = ({ id, title, description }) => {
-  const [restaurants, setRestaurants] = useState([]);
+  const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
 
   const query = `
   *[_type == "featured" && _id == $id] {
@@ -41,7 +44,7 @@ const FeaturedRow = ({ id, title, description }) => {
         className='pt-4'>
         {/* Restaurant cards */}
         {restaurants?.map((restaurant) => (
-          <RestaurantCard key={restaurant._id} {...restaurant} />
+          <RestaurantCard key={restaurant._id} restaurant={restaurant} />
         ))}
       </ScrollView>
     </View>

@@ -15,9 +15,11 @@ import Categories from '../../components/Categories';
 import FeaturedRow from '../../components/FeaturedRow';
 import { useEffect, useState } from 'react';
 import sanityClient from '../../sanity';
+import React from 'react';
+import { IFeaturedCategory } from '../../typings';
 
 const HomeScreen = () => {
-  const [featuredCategories, setFeaturedCategories] = useState([]);
+  const [featuredCategories, setFeaturedCategories] = useState<IFeaturedCategory[]>([]);
 
   const query = `
     *[_type == "featured"] {
