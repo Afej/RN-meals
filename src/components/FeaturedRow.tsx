@@ -4,6 +4,7 @@ import { ArrowRightIcon } from 'react-native-heroicons/outline';
 import RestaurantCard from './RestaurantCard';
 import sanityClient from '../sanity';
 import { IRestaurant } from '../typings';
+import { primaryColor } from '../utilities/constants';
 
 // type FeaturedRowProps = {}
 
@@ -33,7 +34,7 @@ const FeaturedRow = ({ id, title, description }) => {
     <View>
       <View className='flex-row items-center justify-between px-4 mt-5'>
         <Text className='text-lg font-bold'>{title}</Text>
-        <ArrowRightIcon color='#00CCBB' />
+        <ArrowRightIcon color={primaryColor}/>
       </View>
 
       <Text className='px-4 text-xs text-gray-500'>{description}</Text>

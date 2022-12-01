@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react';
 import sanityClient from '../../sanity';
 import React from 'react';
 import { IFeaturedCategory } from '../../typings';
+import { primaryColor } from '../../utilities/constants';
 
 const HomeScreen = () => {
   const [featuredCategories, setFeaturedCategories] = useState<IFeaturedCategory[]>([]);
@@ -49,11 +50,11 @@ const HomeScreen = () => {
         <View className='flex-1'>
           <Text className='text-sm font-bold text-gray-400'>Deliver Now!</Text>
           <Text className='text-xl font-bold'>
-            Current Location <ChevronDownIcon size={20} color='#00CCBB' />
+            Current Location <ChevronDownIcon size={20} color={primaryColor} />
           </Text>
         </View>
 
-        <UserIcon size={35} color='#00CCBB' />
+        <UserIcon size={35} color={primaryColor} />
       </View>
 
       {/* search */}
@@ -66,7 +67,7 @@ const HomeScreen = () => {
           />
         </View>
 
-        <AdjustmentsVerticalIcon color='#00CCBB' />
+        <AdjustmentsVerticalIcon color={primaryColor} />
       </View>
 
       <ScrollView
