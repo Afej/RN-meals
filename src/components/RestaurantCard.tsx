@@ -2,8 +2,8 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import { MapPinIcon, StarIcon } from 'react-native-heroicons/solid';
 import { urlFor } from '../sanity';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
-import { IRestaurant, RootStackParamList } from '../typings';
+import { IRestaurant } from '../typings';
+import { useNavigator } from '../hooks';
 
 type Props = {
   restaurant: IRestaurant;
@@ -11,7 +11,7 @@ type Props = {
 
 const RestaurantCard = ({ restaurant }: Props) => {
   const { name, image, rating, address, type } = restaurant;
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const { navigation } = useNavigator();
 
   const openRestaurantScreen = () => {
     navigation.navigate('Restaurant', {

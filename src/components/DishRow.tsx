@@ -7,10 +7,10 @@ import { primaryColor } from '../utilities/constants';
 import { urlFor } from '../sanity';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import {
-  addToBasket,
-  removeFromBasket,
-  selectBasketItemsById,
-} from '../store/basket/basketSlice';
+  addToCart,
+  removeFromCart,
+  selectCartItemsById,
+} from '../store/cart/cartSlice';
 
 type Props = {
   dish: IDish;
@@ -19,18 +19,18 @@ type Props = {
 const DishRow = ({ dish }: Props) => {
   const { name, short_description, price, image, _id } = dish;
   const dispatch = useAppDispatch();
-  const items = useAppSelector((state) => selectBasketItemsById(state, _id));
+  const items = useAppSelector((state) => selectCartItemsById(state, _id));
 
   const [pressed, setPressed] = useState(false);
 
   const togglePressed = () => setPressed(!pressed);
 
-  const addItemsToBasket = () => {
-    dispatch(addToBasket(dish));
+  const addItemsToCart = () => {
+    dispatch(addToCart(dish));
   };
-  const removeItemsFromBasket = () => {
+  const removeItemsFromCart = () => {
     if (!items.length) return;
-    dispatch(removeFromBasket(_id));
+    dispatch(removeFromCart({ id: _id }));
   };
 
   return (
@@ -59,7 +59,7 @@ const DishRow = ({ dish }: Props) => {
         <View className='p-3 bg-white'>
           <View className='flex-row items-center space-x-2'>
             <TouchableOpacity
-              onPress={removeItemsFromBasket}
+              onPress={removeItemsFromCart}
               disabled={!items.length}>
               <MinusCircleIcon
                 color={items.length ? primaryColor : 'gray'}
@@ -67,7 +67,7 @@ const DishRow = ({ dish }: Props) => {
               />
             </TouchableOpacity>
             <Text className='text-lg'>{items.length}</Text>
-            <TouchableOpacity onPress={addItemsToBasket}>
+            <TouchableOpacity onPress={addItemsToCart}>
               <PlusCircleIcon color={primaryColor} size={35} />
             </TouchableOpacity>
           </View>
