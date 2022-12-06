@@ -2,6 +2,8 @@ export type RootStackParamList = {
   Home: undefined;
   Restaurant: { restaurant: IRestaurant };
   Cart: undefined;
+  Order: undefined;
+  Delivery: undefined;
 };
 
 export type IRestaurant = {

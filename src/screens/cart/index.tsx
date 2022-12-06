@@ -52,13 +52,17 @@ const CartScreen = () => {
     dispatch(removeFromCart({ id }));
   };
 
+  const openOrderScreen = () => {
+    navigation.navigate('Order');
+  };
+
   const cartItems = Object.entries(groupedItemsInCart).map(
     ([key, items]: [string, IDish[]]) => {
       return (
         <View
           className='flex-row items-center p-4 space-x-3 bg-white'
           key={key}>
-          <View className='flex flex-row items-center flex-1 space-x-3'>
+          <View className='flex-row items-center flex-1 space-x-3'>
             <Text className='text-[#00CCBB] text-base'>{items.length} x</Text>
             <Image
               source={{
@@ -68,7 +72,7 @@ const CartScreen = () => {
             />
             <Text className='flex-1 text-sm'>{items[0]?.name}</Text>
           </View>
-          <View className='flex flex-row items-center space-x-2'>
+          <View className='flex-row items-center space-x-2'>
             <Text className='text-gray-600'>
               <Currency quantity={items[0]?.price} currency='NGN' />
             </Text>
@@ -85,7 +89,7 @@ const CartScreen = () => {
   return (
     <>
       <SafeAreaView className='relative'>
-        <View className='flex flex-row items-center p-4 bg-white'>
+        <View className='flex-row items-center p-4 bg-white'>
           <View className='items-center flex-1'>
             <Text className='text-2xl font-bold'>Cart</Text>
             <Text className='text-gray-500'>{restaurant.name}</Text>
@@ -135,6 +139,7 @@ const CartScreen = () => {
           </Text>
         </View>
         <TouchableOpacity
+          onPress={openOrderScreen}
           className={`bg-[${primaryColor}] p-4 rounded-lg my-4`}>
           <Text className='text-xl font-bold text-center text-white'>
             Place order
